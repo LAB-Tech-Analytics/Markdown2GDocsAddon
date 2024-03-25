@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="Styles.html">
+    <base target="_top">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Markdown to Google Docs</h2>
+      <label for="markdownInput">Paste your Markdown here:</label>
+      <textarea id="markdownInput" placeholder="Enter Markdown"></textarea>
+      <button id="convertButton" class="button-primary">Convert</button>
+    </div>
+    <script>
+      document.getElementById('convertButton').addEventListener('click', function() {
+        const markdownText = document.getElementById('markdownInput').value;
+        google.script.run
+          .withSuccessHandler(function() {
+            // Optionally clear the textarea after successful conversion
+            document.getElementById('markdownInput').value = '';
+            google.script.host.close(); // Close the dialog after conversion
+          })
+          .withFailureHandler(function(error) {
+            // Handle errors, such as by displaying a message to the user
+            console.error("Error during conversion:", error);
+            alert("Error: " + error.message);
+          })
+          .parseAndInsertMarkdown(markdownText);
+      });
+    </script>
+  </body>
+</html>
