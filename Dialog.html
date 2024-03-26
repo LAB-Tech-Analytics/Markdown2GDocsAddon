@@ -2,11 +2,77 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="Styles.html">
+    <style>
+	  body, html {
+		font-family: 'Roboto', sans-serif;
+		margin: 0;
+		padding: 0;
+		background-color: #fff; /* Google products often use a clean white background */
+	  }
+
+	  .container {
+		padding: 20px;
+		border: 1px solid #e0e0e0; /* Light grey border, common in Google UI */
+		border-radius: 8px; /* Rounded corners for modern look */
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth, common in Material Design */
+		max-width: 400px; /* Fixed max-width for dialog size consistency */
+		margin: 20px auto; /* Centering the dialog */
+	  }
+
+	  h2 {
+		color: #202124; /* Slightly softer than pure black for text */
+		font-size: 24px; /* Slightly larger font size for headers */
+		margin-bottom: 16px; /* Adjusted margin for visual balance */
+	  }
+
+	  label {
+		display: block;
+		margin-bottom: 8px; /* Adjusted margin for tighter form grouping */
+		color: #5f6368; /* Soft grey for labels, enhancing readability */
+		font-size: 14px; /* Standard font size for form labels */
+	  }
+
+	  textarea {
+		width: 100%;
+		height: 150px;
+		padding: 10px;
+		margin-bottom: 24px; /* Increased margin for clearer separation */
+		border: 1px solid #dadce0; /* Using Google's light grey border */
+		border-radius: 4px; /* Standard border radius */
+		box-sizing: border-box;
+		resize: vertical;
+		font-family: 'Roboto', sans-serif; /* Ensuring font consistency */
+		font-size: 14px; /* Standard text size */
+	  }
+
+	  .button-primary {
+		background-color: #1a73e8; /* Google's blue for primary buttons */
+		color: white;
+		padding: 10px 24px; /* Slightly larger padding for a better touch target */
+		margin: 0; /* Resetting margin for alignment */
+		border: none; /* Removing border for button */
+		border-radius: 4px; /* Standard border radius */
+		cursor: pointer;
+		font-family: 'Roboto', sans-serif; /* Ensuring font consistency */
+		font-size: 14px; /* Standard text size */
+		text-transform: uppercase; /* Uppercase text for call-to-action buttons */
+		letter-spacing: 0.25px; /* Adding letter-spacing for uppercase text readability */
+	  }
+
+	  .button-primary:hover {
+		background-color: #2b7de9; /* Slightly lighter blue on hover for interaction feedback */
+		box-shadow: 0 1px 3px rgba(26,115,232,0.3); /* Subtle shadow for depth on hover */
+		transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for hover effects */
+	  }
+  </style>
+
   </head>
   <body>
     <div class="container">
-      <h2>Markdown to Google Docs</h2>
+      <div class="header">
+        <img src="logo.jpg" alt="Markdown2GDocs Logo" style="height: 50px; vertical-align: middle; padding-right: 10px;" />
+        <h2 style="display: inline-block; vertical-align: middle;">Markdown2GDocs</h2>
+      </div>
       <label for="markdown-input">Enter your Markdown text:</label>
       <textarea id="markdown-input"></textarea>
       <button class="button-primary" onclick="convertMarkdown()">Convert</button>
@@ -15,13 +81,10 @@
     <script>
       function convertMarkdown() {
         const markdownText = document.getElementById('markdown-input').value;
-        // Calls the server-side Google Apps Script function 'parseAndInsertMarkdown'
+        // Assuming parseAndInsertMarkdown function is correctly set up in MarkdownParser.js and exposed to the client side
         google.script.run.withSuccessHandler(function() {
-          // Optional: Handle successful conversion, such as displaying a success message
-          // or closing the modal/dialog if appropriate.
           console.log('Markdown converted successfully.');
         }).withFailureHandler(function(err) {
-          // Optional: Handle errors, such as displaying an error message to the user.
           console.error('Error converting Markdown:', err);
         }).parseAndInsertMarkdown(markdownText);
       }
