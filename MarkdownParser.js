@@ -21,9 +21,22 @@ function parseAndInsertMarkdown(markdownText) {
     let inCodeBlock = false;
     let codeBlockText = '';
 	
-	// Clear the document body to start fresh
-    body.clear();
-
+	// Instead of clearing the body, get the current cursor position
+    const cursor = doc.getCursor();
+    if (cursor) {
+        // Insert at cursor position
+        const element = cursor.insertText(markdownText);
+        if (element) {
+            element.setBold(false); // Example of setting initial styling if needed
+            // Add more styling as needed
+        } else {
+            // Fallback to appending content at the end if cursor placement fails
+            body.appendParagraph(markdownText);
+        }
+    } else {
+        // If there is no cursor (document isn't open or no selection), append at end
+        body.appendParagraph(markdownText);
+    }
     // Global storages for footnotes and reference-style links
     let footnotes = {};
     let referenceLinks = {};
