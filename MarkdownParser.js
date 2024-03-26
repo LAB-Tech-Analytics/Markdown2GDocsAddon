@@ -1,3 +1,7 @@
+/**
+ * MarkdownParser.js
+ * Implements wrap function for MarkdownUtils.js
+ */
 // Assumes MarkdownUtils.js is available and properly modularized
 
 /**

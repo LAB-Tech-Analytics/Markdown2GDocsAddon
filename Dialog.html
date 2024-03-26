@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="Styles.html">
-    <base target="_top">
   </head>
   <body>
     <div class="container">
       <h2>Markdown to Google Docs</h2>
-      <label for="markdownInput">Paste your Markdown here:</label>
-      <textarea id="markdownInput" placeholder="Enter Markdown"></textarea>
-      <button id="convertButton" class="button-primary">Convert</button>
+      <label for="markdown-input">Enter your Markdown text:</label>
+      <textarea id="markdown-input"></textarea>
+      <button class="button-primary" onclick="convertMarkdown()">Convert</button>
     </div>
+    
     <script>
-      document.getElementById('convertButton').addEventListener('click', function() {
-        const markdownText = document.getElementById('markdownInput').value;
-        google.script.run
-          .withSuccessHandler(function() {
-            // Optionally clear the textarea after successful conversion
-            document.getElementById('markdownInput').value = '';
-            google.script.host.close(); // Close the dialog after conversion
-          })
-          .withFailureHandler(function(error) {
-            // Handle errors, such as by displaying a message to the user
-            console.error("Error during conversion:", error);
-            alert("Error: " + error.message);
-          })
-          .parseAndInsertMarkdown(markdownText);
-      });
+      function convertMarkdown() {
+        const markdownText = document.getElementById('markdown-input').value;
+        // Calls the server-side Google Apps Script function 'parseAndInsertMarkdown'
+        google.script.run.withSuccessHandler(function() {
+          // Optional: Handle successful conversion, such as displaying a success message
+          // or closing the modal/dialog if appropriate.
+          console.log('Markdown converted successfully.');
+        }).withFailureHandler(function(err) {
+          // Optional: Handle errors, such as displaying an error message to the user.
+          console.error('Error converting Markdown:', err);
+        }).parseAndInsertMarkdown(markdownText);
+      }
     </script>
   </body>
 </html>
