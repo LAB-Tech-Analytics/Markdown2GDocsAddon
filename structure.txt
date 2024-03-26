@@ -1,6 +1,6 @@
 MarkdownToGoogleDocsAddon/
 ├── Code.js                # Main script for Google Apps Script
 ├── Dialog.html            # HTML for the input dialog or sidebar
-├── Styles.html            # CSS for styling the dialog or sidebar
-├── MarkdownParser.js      # Module for parsing Markdown and creating Docs elements
-└── Utils.js               # Utility functions
+├── logo.jpg               # JPG for the input dialog or sidebar
+├── MarkdownParser.js      # Orchestrator for parsing Markdown and creating Docs elements
+└── MarkdownUtils.js       # Module for detailed Markdown parsing logic
